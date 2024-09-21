@@ -1,0 +1,97 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rust
+---
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-nginx
+  namespace: rust
+spec:
+  # ACME issuer configuration
+  # `email` - the email address to be associated with the ACME account (make sure it's a valid one)
+  # `server` - the URL used to access the ACME server’s directory endpoint
+  # `privateKeySecretRef` - Kubernetes Secret to store the automatically generated ACME account private key
+  acme:
+    email: <CERTIFICATE_EMAIL>
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-nginx-private-key
+    solvers:
+      # Use the HTTP-01 challenge provider
+      - http01:
+          ingress:
+            class: nginx
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-web
+  namespace: rust
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rust-web
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: rust-web
+    spec:
+      containers:
+      - name: hello-app
+        image: docker.io/giuliohome/rust-playground-kaniko:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 50m
+          limits:
+            cpu: 50m
+---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: rust
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    app: rust-web
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-myweb
+  namespace: rust
+  annotations:
+    cert-manager.io/issuer: letsencrypt-nginx
+spec:
+  tls:
+    - hosts:
+      - myweb.giuliohome.org
+      secretName: letsencrypt-nginx-myweb
+  rules:
+    - host: myweb.giuliohome.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 80
+  ingressClassName: nginx

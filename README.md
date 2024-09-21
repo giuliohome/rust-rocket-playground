@@ -53,4 +53,14 @@ sudo ctr images push \
     docker.io/${DHUSER}/rust-playground-kaniko:latest
 ```
 
+- Deploy to Kubernetes (create the cluster, see [my instructions for digitalocean](https://github.com/giuliohome/web-golang/blob/digitalocean/README.md))
+```sh
+cd k8s
+kubectl apply -f deployment.yml
+kubectl rollout status deployment/rust-web -n rust
 
+- Open in the browser
+  - https://myweb.giuliohome.org/
+  - https://myweb.giuliohome.org/json
+  - https://myweb.giuliohome.org/api/data
+```
