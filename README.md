@@ -58,9 +58,10 @@ sudo ctr images push \
 cd k8s
 kubectl apply -f deployment.yml
 kubectl rollout status deployment/rust-web -n rust
+```
 
-- Open in the browser
+- Open in the browser your website, e.g.:
   - https://myweb.giuliohome.org/
   - https://myweb.giuliohome.org/json
   - https://myweb.giuliohome.org/api/data
-```
+
