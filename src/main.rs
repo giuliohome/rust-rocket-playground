@@ -1,6 +1,6 @@
 #[macro_use] extern crate rocket;
 
-use rocket::fs::{FileServer, relative};
+use rocket::fs::FileServer;
 
 use std::fs::File;
 use std::io::Read;
@@ -80,5 +80,5 @@ fn hello() -> &'static str {
 fn rocket() -> _ {
         rocket::build()
             .mount("/", routes![hello, get_json, data])
-            .mount("/", FileServer::from(relative!("src/public")))
+            .mount("/", FileServer::from("src/public"))
 }
