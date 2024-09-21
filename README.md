@@ -53,7 +53,7 @@ sudo ctr images push \
     docker.io/${DHUSER}/rust-playground-kaniko:latest
 ```
 
-- Deploy to Kubernetes (create the cluster, see [my instructions for digitalocean](https://github.com/giuliohome/web-golang/blob/digitalocean/README.md))
+- Deploy to Kubernetes (create the cluster, see [my instructions for digitalocean](https://github.com/giuliohome/web-golang/blob/digitalocean/README.md), update the certificate email, etc...)
 ```sh
 cd k8s
 kubectl apply -f deployment.yml
@@ -64,4 +64,6 @@ kubectl rollout status deployment/rust-web -n rust
   - https://myweb.giuliohome.org/
   - https://myweb.giuliohome.org/json
   - https://myweb.giuliohome.org/api/data
+
+[![DigitalOcean Referral Badge](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=845894b81ff7&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
 
