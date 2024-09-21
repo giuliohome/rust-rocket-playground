@@ -1,0 +1,5 @@
+[
+    {"id": 1, "value": "First"},
+    {"id": 2, "value": "Second"},
+    {"id": 3, "value": "Third from json file"}
+]

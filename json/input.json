@@ -1,0 +1,22 @@
+{
+  "resources": [
+    {
+      "key": "project",
+      "value": "main"
+    },
+    {
+      "key": "group",
+      "value": "root"
+    }
+  ],    
+  "imports": [
+     {
+      "id":"a1",
+      "value": "$var.1"
+    }, 
+    {
+      "id":"a2",
+      "value": "$var.2"
+    } 
+  ]
+} 
