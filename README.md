@@ -1,12 +1,12 @@
 ## Containerization
 
-Use a Dockerfile from [rocket guide](https://rocket.rs/guide/v0.5/deploying/#containerization), but **modified** to include a custom root certificate (uncomment and copy it here!) and a json folder.
+Use a Dockerfile from [rocket guide](https://rocket.rs/guide/v0.5/deploying/#containerization), but **modified** to include a custom root certificate (uncomment and copy it here!) and a json folder as well as a static folder.
 
-- start your Linux from this root folder using a cool [windows terminal](https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-us&gl=IT)
+- Start your Linux from this root folder using a cool [windows terminal](https://apps.microsoft.com/detail/9n0dx20hk701?hl=en-us&gl=IT)
 ```sh
 wsl
 ```
-- Pull Kaniko image into ctr
+- Pull Kaniko image into ctr (start containerd first)
 ```sh
 sudo ctr i pull gcr.io/kaniko-project/executor:latest
 ```

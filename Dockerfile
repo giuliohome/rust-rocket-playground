@@ -28,6 +28,7 @@ COPY --from=build /build/main ./
 
 ## copy runtime assets which may or may not exist
 COPY --from=build /build/json/ ./json
+COPY --from=build /build/src/public/ ./src/public
 ##  COPY --from=build /build/Rocket.tom[l] ./static
 ##  COPY --from=build /build/stati[c] ./static
 ##  COPY --from=build /build/template[s] ./templates
