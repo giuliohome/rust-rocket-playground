@@ -7,8 +7,8 @@ WORKDIR /build
 
 COPY . .
 
-RUN cp ./MyRootCA.crt /usr/local/share/ca-certificates/
-RUN update-ca-certificates
+# RUN cp ./MyRootCA.crt /usr/local/share/ca-certificates/
+# RUN update-ca-certificates
 
 RUN --mount=type=cache,target=/build/target \
     --mount=type=cache,target=/usr/local/cargo/registry \
