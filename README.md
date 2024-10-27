@@ -67,3 +67,8 @@ kubectl rollout status deployment/rust-web -n rust
 
 [![DigitalOcean Referral Badge](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=845894b81ff7&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
 
+## Weather Forecast
+
+Added with [this commit](https://github.com/giuliohome/rust-rocket-playground/commit/511e9a7087bad8cb1211d7f256cedd6ac01ac14b)
+
+![image](https://github.com/user-attachments/assets/33aac8e1-da80-46a0-a4e7-e5b022ee21d2)
