@@ -6,8 +6,85 @@ use std::fs::File;
 use std::io::Read;
 use std::io::BufReader;
 
+//use chrono::NaiveDateTime;
+use reqwest::Client;
+use std::env;
+
 use rocket::serde::{Serialize, Deserialize, json::Json};
 
+
+
+#[derive(Deserialize,Debug)]
+struct WeatherResponse {
+    list: Vec<ForecastEntry>,
+}
+
+#[derive(Deserialize,Debug)]
+struct ForecastEntry {
+    // dt: i64,
+    dt_txt: String,
+    main: Main,
+    weather: Vec<Weather>,
+}
+
+#[derive(Deserialize,Debug)]
+struct Main {
+    temp: f32,
+}
+
+#[derive(Deserialize,Debug)]
+struct Weather {
+    description: String,
+}
+
+#[get("/forecast/<city>")]
+async fn forecast(city: &str) -> Json<Vec<String>> {
+    let api_key = env::var("OPENWEATHER_API_KEY").expect("API key not set");
+    let url = format!(
+        "https://api.openweathermap.org/data/2.5/forecast?q={}&appid={}&units=metric",
+        city, api_key
+    );
+
+    let client = Client::new();
+    /*let client = reqwest::Client::builder()
+        .danger_accept_invalid_certs(true) // Disable SSL validation (not for production)
+        .build()
+        .expect("Failed to build client");
+    match reqwest::get(&url).await {
+        Ok(response) => match response.text().await {
+            Ok(text) => {
+                // Print and parse the response text
+                println!("API response: {}", text);
+                match serde_json::from_str::<WeatherResponse>(&text) {
+                    Ok(parsed) => println!("Parsed JSON: {:?}", parsed),
+                    Err(e) => println!("Error parsing JSON: {}", e),
+                }
+            }
+            Err(e) => println!("Failed to read response text: {}", e),
+        },
+        Err(e) => println!("Failed to make request: {}", e),
+    }*/
+    if let Ok(resp) = client.get(&url).send().await {
+        if let Ok(weather) = resp.json::<WeatherResponse>().await {
+            let forecasts: Vec<String> = weather.list.iter().map(|entry| {
+                // let forecast_time = NaiveDateTime::from_timestamp(entry.dt, 0);
+                let forecast_time_str = entry.dt_txt.to_string();
+                let description = entry.weather.get(0).map_or(
+                    "No description available.".to_string(),
+                    |w| w.description.clone(),
+                );
+                format!(
+                    "{}: {}°C, {}",
+                    forecast_time_str, entry.main.temp, description
+                )
+            }).collect();
+
+            return Json(forecasts);
+        }
+    }
+
+    Json(vec![format!("{} using url {}","Failed to retrieve forecast data.".to_string(), url)])
+}
 
 #[get("/api/data")]
 fn data() -> Json<Vec<MyData>> {
@@ -79,6 +156,6 @@ fn hello() -> &'static str {
 #[launch]
 fn rocket() -> _ {
         rocket::build()
-            .mount("/", routes![hello, get_json, data])
+            .mount("/", routes![hello, get_json, data, forecast])
             .mount("/", FileServer::from("src/public"))
 }
