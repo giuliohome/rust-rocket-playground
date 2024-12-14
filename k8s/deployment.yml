@@ -4,6 +4,23 @@ metadata:
   name: rust
 ---
 ---
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: digitalocean-dns
+  namespace: rust
+data:
+  # insert your DO access token here
+  access-token: "<DIGITALOCEAN_TOKEN>"
+---
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rust
+---
+---
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
@@ -20,10 +37,11 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-nginx-private-key
     solvers:
-      # Use the HTTP-01 challenge provider
-      - http01:
-          ingress:
-            class: nginx
+    - dns01:
+        digitalocean:
+          tokenSecretRef:
+            name: digitalocean-dns
+            key: access-token
 ---
 ---
 apiVersion: apps/v1

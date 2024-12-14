@@ -72,3 +72,8 @@ kubectl rollout status deployment/rust-web -n rust
 Added with [this commit](https://github.com/giuliohome/rust-rocket-playground/commit/511e9a7087bad8cb1211d7f256cedd6ac01ac14b)
 
 ![image](https://github.com/user-attachments/assets/33aac8e1-da80-46a0-a4e7-e5b022ee21d2)
+
+## Cert-Manager
+
+Cert Manager can also be used in on-premises Kubernetes environments. In such cases, referencing the DigitalOcean domain is beneficial, as it integrates well with the automated Let's Encrypt challenge for issuing certificates. The integration simplifies DNS management, making certificate issuance more efficient. Use DO token in the deployment to automate the TXT DNS challange.
+In case of a Minikube PoC in one's home intranet, one will need a port forward in the router's NAT and an Nginx reverse proxy to the Minikube tunnel (127.0.0.1) on Windows 11.
