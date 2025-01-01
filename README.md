@@ -77,3 +77,26 @@ Added with [this commit](https://github.com/giuliohome/rust-rocket-playground/co
 
 Cert Manager can also be used in on-premises Kubernetes environments. In such cases, referencing the DigitalOcean domain is beneficial, as it integrates well with the automated Let's Encrypt challenge for issuing certificates. The integration simplifies DNS management, making certificate issuance more efficient. Use DO token in the deployment to automate the TXT DNS challange.
 In case of a Minikube PoC in one's home intranet, one will need a port forward in the router's NAT and an Nginx reverse proxy to the Minikube tunnel (127.0.0.1) on Windows 11.
+
+## Hyper-V
+
+When using Hyper-V (instead of Docker), you don't need the `minikube tunnel`.
+Instead, you can forward directly to `minikube ip` in `nginx.conf`, e.g.:
+
+```nginx
+    server {
+    listen 443 ssl;
+    server_name myweb.giuliohome.org;
+    ssl_certificate c:/development/mycert/cert.crt;
+    ssl_certificate_key c:/development/mycert/cert.key;
+
+    location / {
+        # The configuration line below is for the Hyper-V Minikube IP;
+        proxy_pass https://192.168.203.194:443;
+        # no Minikube tunnel is needed
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
