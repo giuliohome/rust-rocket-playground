@@ -1,0 +1,3 @@
+[submodule "android-cli"]
+	path = android-cli
+	url = https://github.com/giuliohome-org/weatherforecastapp.git
