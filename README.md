@@ -73,6 +73,8 @@ Added with [this commit](https://github.com/giuliohome/rust-rocket-playground/co
 
 ![image](https://github.com/user-attachments/assets/33aac8e1-da80-46a0-a4e7-e5b022ee21d2)
 
+Android Client App:  https://github.com/giuliohome-org/weatherforecastapp
+
 ## Cert-Manager
 
 Cert Manager can also be used in on-premises Kubernetes environments. In such cases, referencing the DigitalOcean domain is beneficial, as it integrates well with the automated Let's Encrypt challenge for issuing certificates. The integration simplifies DNS management, making certificate issuance more efficient. Use DO token in the deployment to automate the TXT DNS challange.
