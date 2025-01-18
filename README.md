@@ -13,7 +13,7 @@ sudo ctr i pull gcr.io/kaniko-project/executor:latest
 
 - build with Kaniko and export to a local tar
 ```sh
-sudo ctr run --net-host --rm --mount type=bind,src=$(pwd),dst=/workspace,options=rbind:rw gcr.io/kaniko-project/executor:latest kaniko-executor /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --no-push --skip-tls-verify --build-arg pkg=hello-rocket --build-arg OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY --tarPath=/workspace/rust-playground-kaniko.tar --destination=localhost/rust-playground-kaniko:latest
+sudo ctr run --net-host --rm --mount type=bind,src=$(pwd),dst=/workspace,options=rbind:rw gcr.io/kaniko-project/executor:latest kaniko-executor /kaniko/executor --dockerfile=/workspace/Dockerfile --context=/workspace --no-push --skip-tls-verify --build-arg pkg=rocket-app --build-arg OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY --tarPath=/workspace/rust-playground-kaniko.tar --destination=localhost/rust-playground-kaniko:latest
 ```
 
 - Import the image into containerd
