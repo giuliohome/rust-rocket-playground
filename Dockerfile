@@ -40,15 +40,9 @@ COPY --from=build /build/src/public/ ./src/public
 ##  COPY --from=build /build/stati[c] ./static
 ##  COPY --from=build /build/template[s] ./templates
 
-# Define an argument for the OpenWeatherMap API key
-ARG OPENWEATHER_API_KEY
-# Set it as an environment variable inside the container
-ENV OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
 
 ## ensure the container listens globally on port 8080
 ENV ROCKET_ADDRESS=0.0.0.0
 ENV ROCKET_PORT=8080
-
-RUN echo OPENWEATHER_API_KEY $OPENWEATHER_API_KEY
 
 CMD ./main

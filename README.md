@@ -23,7 +23,7 @@ sudo ctr image import rust-playground-kaniko.tar
 
 - Create the container
 ```sh
-sudo ctr c create --net-host localhost/rust-playground-kaniko:latest rust-playground
+sudo ctr c create --net-host --env OPENWEATHER_API_KEY=<your api key>  localhost/rust-playground-kaniko:latest rust-playground
 ```
 
 - Start the task
