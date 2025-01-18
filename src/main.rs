@@ -112,7 +112,7 @@ fn data() -> Json<Vec<MyData>> {
 
     // Update a value (modify where id == 2)
     if let Some(item) = data.iter_mut().find(|x| x.id == 2) {
-        item.value = "Updated Second".to_string();
+        item.value = "Azure Continuous Deployment".to_string();
     }
 
     // Add a new object
