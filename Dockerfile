@@ -45,4 +45,4 @@ COPY --from=build /build/src/public/ ./src/public
 ENV ROCKET_ADDRESS=0.0.0.0
 ENV ROCKET_PORT=8080
 
-CMD ./main
+ENTRYPOINT ["./main"]
