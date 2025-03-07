@@ -13,3 +13,9 @@ serde_json = "1.0"
 tokio = { version = "1", features = ["full"] }
 chrono = "0.4"
 # rocket_contrib = "0.4.11"
+
+
+[default.limits]
+form = "10 MiB"
+"multipart/form-data" = "10 MiB"
+"file/jpg" = "10 MiB"
