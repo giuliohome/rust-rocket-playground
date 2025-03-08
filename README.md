@@ -1,3 +1,7 @@
+## Scope
+
+This is a playground. Check out my [doc-manager](https://github.com/giuliohome-org/doc-manager) repo for a complete Rust-React application example.
+
 ## Containerization
 
 Use a Dockerfile from [rocket guide](https://rocket.rs/guide/v0.5/deploying/#containerization), but **modified** to include a custom root certificate (uncomment and copy it here!) and a json folder as well as a static folder.
