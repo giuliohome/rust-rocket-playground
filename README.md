@@ -1,6 +1,8 @@
 ## Scope
 
-This is a playground. Check out my [doc-manager](https://github.com/giuliohome-org/doc-manager) repo for a complete Rust-React application example.
+This repository is a Rust playground with an Android CLI submodule. 
+
+Check out my [doc-manager](https://github.com/giuliohome-org/doc-manager) repo for a complete Rust-React application example instead.
 
 ## Containerization
 
